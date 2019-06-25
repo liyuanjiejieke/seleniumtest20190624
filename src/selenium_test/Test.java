@@ -22,6 +22,7 @@ import java.util.*;
 import static java.lang.Thread.sleep;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
 //import selenium.webdriver.common.keys;
 public class Test {
@@ -34,7 +35,7 @@ public class Test {
        System.setProperty("webdriver.chrome.driver","D:\\soft\\chromdriver\\chromedriver.exe");//chromedriver服务地址
            driver =new ChromeDriver(); //新建一个WebDriver 的对象，但是new 的是FirefoxDriver的驱动
 //        driver.get("https://www.baidu.com/");//打开指定的网站  https://www.imooc.com/
-        driver.get("D:\\checkandradio.html");
+//        driver.get("D:\\checkandradio.html");
 //        /*    driver.get("https://baike.baidu.com/item/%E8%A1%A8%E6%A0%BC/3371820");*/
 
 
@@ -385,8 +386,39 @@ public class Test {
         driver.findElement(By.xpath("/html/body/p/input[2]")).click();*/
 
         //自动选择多选框
+        /*driver.get("D:\\checkandradio.html");
 
-//        java   222222222
+        WebElement w1=driver.findElement(By.xpath("/html/body/input[1]"));
+        WebElement w2=driver.findElement(By.xpath("/html/body/input[2]"));
+        WebElement w3=driver.findElement(By.xpath("/html/body/input[3]"));
+
+        //检查是否已选择  如果没选择点击选择
+        if (!w1.isSelected()){
+            w1.click();
+        }
+        if (!w2.isSelected()){
+            w2.click();
+        }
+        if (!w3.isSelected()){
+            w3.click();
+        }
+        //验证选项已经选中
+        assertTrue(w1.isSelected());
+        assertTrue(w2.isSelected());
+        assertTrue(w3.isSelected());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //再次点击多选框  取消选项
+        if (w1.isSelected()) {
+            w1.click();
+        }
+        assertFalse(w1.isSelected());*/
+
+
+        //2.16处理windows  进程
 
 
 
