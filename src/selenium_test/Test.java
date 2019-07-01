@@ -8,8 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import sun.awt.windows.WEmbeddedFrame;
 
 import javax.print.DocFlavor;
@@ -18,14 +22,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.fail;
 //import selenium.webdriver.common.keys;
+
+import org.openqa.selenium.os.WindowsUtils;
 public class Test {
+
     static WebDriver driver;
     public static void main(String[] args) {
 
@@ -419,6 +428,125 @@ public class Test {
 
 
         //2.16处理windows  进程
+//        WindowsUtils.killByName("firefox.exe");
+//        WindowsUtils.killByName("firefox.exe");
+//
+
+
+      /*  //刷新浏览器
+        driver.navigate().refresh();
+
+        //浏览器后退
+        driver.navigate().back();
+
+        //浏览器前进
+        driver.navigate().forward();
+
+        //浏览器退出
+        driver.quit();*/
+
+      //3.2  使用隐式的等待同步测试
+
+
+
+        /*WebElement webElement=driver.findElement(By.name("wd"));
+        webElement.sendKeys("selenium2");
+        webElement.submit();*/
+
+        //显示等待
+        //1. 显示等待
+       /* (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+
+            @Override
+            public Boolean apply(WebDriver driver) {
+                // TODO Auto-generated method stub
+                return driver.getTitle().toLowerCase().startsWith("selenium");
+            }
+
+        });
+
+        System.out.println("Page title is---------"+driver.getTitle());
+
+        driver.navigate().back();*/
+
+
+
+      /*  //隐式等待
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("//*[@id=\"u1\"]/a[1]")).click();
+        driver.quit();
+*/
+
+      //显示等待
+        /*WebElement elemet=new WebDriverWait(driver,5).
+                until(ExpectedConditions.presenceOfElementLocated(By.id("kw")));*/
+
+        //显示等待
+
+        /*driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        driver.get("https://www.baidu.com/");
+
+        WebElement element=driver.findElement(By.id("kw"));*/
+
+
+
+
+
+
+
+
+        //使用自定义条件同步测试
+
+
+        //3.5 检查元素是否存在
+
+        //输入
+        /*driver.findElement(By.id("kw")).sendKeys("selenium");
+
+        //判断搜索按钮是否存在
+        if(isElement(By.id("su"))){
+            //点击按钮
+            driver.findElement(By.id("su")).click();
+        }else{
+            fail("元素不存在");
+        }*/
+
+
+
+        //检查元素的状态
+        /*
+        * isEnabled()    检查元素是否启用
+        * isSelected     检查元素是否选中（单选、多选、下拉框）
+        * isDisplayed    检查元素是否可见
+        * */
+
+      /*  driver.get("https://www.baidu.com/");
+
+        //使用values值来定位
+
+        WebElement apple=driver.findElement(By.cssSelector("input[values='Apple']"));
+        //检查元素是否已选择   如果没有则点击选择
+        if(!apple.isSelected()){
+            apple.click();
+        }
+        //验证apple选项已经选中
+        assertTrue(apple.isSelected());
+
+        //得到所有的单选按钮
+        List<WebElement> listbutton =driver.findElements(By.name("AAAAAA"));
+        for(WebElement str:listbutton){
+            if(str.getAttribute("values").equals("DASHDJ")){
+                if(!str.isSelected()) {
+                    str.click();
+                    assertTrue(str.isSelected());
+                    break;
+                }
+            }
+
+        }*/
+
+
+      //通过名称识别和处理一个弹出窗口12322222
 
 
 
@@ -436,7 +564,21 @@ public class Test {
 
 
 
-        /*try {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -444,7 +586,7 @@ public class Test {
 
 
         driver.close();
-        driver.quit();//退出浏览器*/
+        driver.quit();//退出浏览器
 
 
 
@@ -536,6 +678,19 @@ public class Test {
        /* driver.close();
         driver.quit();//退出浏览器*/
        // test();
+    }
+
+
+    //检查元素是否存在
+    public static boolean isElement(By by){
+
+        try{
+        driver.findElement(by);
+        return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
