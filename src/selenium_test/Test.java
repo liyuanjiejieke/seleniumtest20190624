@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.DriverCommand;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -21,7 +22,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+
+
+
+ import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
@@ -36,7 +42,7 @@ import org.openqa.selenium.os.WindowsUtils;
 public class Test {
 
     static WebDriver driver;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
         /*long a=Calendar.getInstance().getTimeInMillis();
 
@@ -546,39 +552,18 @@ public class Test {
         }*/
 
 
-      //通过名称识别和处理一个弹出窗口12322222
-        //ssssssssssssssssssss
+      //通过名称识别和处理一个弹出窗口
 
+        /*String url="D:\\openwindows.html";
+        driver.get(url);
 
+        WebElement alertButton = driver.findElement(By.xpath("/html/body/form/input"));
+        alertButton.click();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //获得当前窗口的句柄         /html/body/form/input
+        String parentWindowld=driver.getWindowHandle();
+        WebElement button=driver.findElement(By.xpath("//input[@value='打开窗口']"));
+        button.click();
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -586,8 +571,239 @@ public class Test {
         }
 
 
+        Set<String> allWindowsld=driver.getWindowHandles();
+
+        for (String windoes:allWindowsld){
+            if(driver.switchTo().window(windoes).getTitle().contains("博客园")){
+                driver.switchTo().window(windoes);
+                break;
+
+            }
+        }
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //再次切换回原来的父窗口
+//        driver.switchTo().window(parentWindowld);*/
+
+   /*     int a=Math.abs("10126095".hashCode());
+        int b=a%128;
+        System.out.println("--------------"+b);*/
+
+/*
+
+        String url="D:\\selenium_html_test\\jinggaotest.html";
+        driver.get(url);
+        WebElement button=driver.findElement(By.name("button"));
+        button.click();
+
+        //获得Alert窗口
+        Alert alertBox =driver.switchTo().alert();
+
+            Thread.sleep(2000);
+
+           alertBox.accept();
+
+        //验证alert窗口里的文字
+        System.out.println(alertBox.getText().toString());
+//        assertEquals("I love javascript",alertBox.getText());
+//        System.out.println("--------"+alertBox.getText());
+
+
         driver.close();
-        driver.quit();//退出浏览器
+*/
+
+
+
+       /* //获得当前窗口的句柄
+        String parentWindowld=driver.getWindowHandle();
+        System.out.println("driver.getTitle----:"+driver.getTitle());
+        WebElement button=driver.findElement(By.xpath("/html/body/form/input"));
+        button.click();
+
+        Set<String> allwindowsid=driver.getWindowHandles();
+        //获得所有打开窗口的句柄
+        for(String windowid:allwindowsid){
+            if(driver.switchTo().window(windowid).getTitle().contains("博客园")){
+                driver.switchTo().window(windowid);
+                break;
+            }
+        }
+
+        System.out.println("新窗口-----------"+driver.getTitle());
+
+        //再次切回原来的父窗口
+        driver.switchTo().window(parentWindowld);
+        System.out.println("parentWindowld+----------"+driver.getTitle());*/
+
+        /*WebElement alertButton = driver.findElement(By.xpath("//input[@value='alert']"));
+        alertButton.click();
+
+        Alert javascriptAlert = driver.switchTo().alert();
+        System.out.println(javascriptAlert.getText());
+        javascriptAlert.accept();*/
+
+
+        //多窗口切换
+
+//        driver.wait(10);
+        /*driver.get("http://www.baidu.com");
+
+      *//*  WebElement wd=driver.findElement(By.name("wd"));
+        wd.sendKeys("元杰");
+        WebElement button=driver.findElement(By.id("su"));
+        button.click();*//*
+        //获得百度搜索窗口的句柄
+        String sreach_windows=driver.getWindowHandle();
+        WebElement login=driver.findElement(By.xpath("//*[@id=\"u1\"]/a[7]"));
+        login.click();
+
+        Thread.sleep(3000);
+        WebElement register=driver.findElement(By.xpath("//*[@id=\"passport-login-pop-dialog\"]/div/div/div/div[4]/a"));
+        register.click();
+        Thread.sleep(2000);
+
+        //获得当前所有打开的窗口的句柄
+          Set<String> all_handles=driver.getWindowHandles();
+
+        //进入注册窗口
+        for(String astring:all_handles){
+//            System.out.println("now register windows");
+            if(astring!=sreach_windows){
+                driver.switchTo().window(astring);
+               WebElement uname= driver.findElement(By.xpath("//*[@id=\"TANGRAM__PSP_4__userName\"]"));
+               uname.sendKeys("lili");
+               WebElement password= driver.findElement(By.xpath("//*[@id=\"TANGRAM__PSP_4__password\"]"));
+               password.sendKeys("123");
+                Thread.sleep(2000);
+            }
+
+
+    }
+*/
+
+       /* driver.get("http://www.baidu.com");
+        driver.manage().window().maximize();
+
+        String searchHandle=driver.getWindowHandle();
+
+        System.out.println(searchHandle.toString()+"-----------------------------");
+        System.out.println("百度"+searchHandle);
+
+        //获得百度新闻的链接   然后使用js打开新的窗口
+        Thread.sleep(3000);
+        String href = driver.findElement(By.cssSelector("[name=tj_trnews]")).getAttribute("href");
+
+        JavascriptExecutor executor= (JavascriptExecutor) driver;
+        executor.executeScript("window.open('"+href+"')");
+        Thread.sleep(2000);
+        Set<String> handles=driver.getWindowHandles();
+       Iterator iterator=handles.iterator();
+
+
+        //进入百度新闻窗口，并获取title验证
+        Thread.sleep(2000);
+        while(iterator.hasNext()){
+            String h=(String) iterator.next();
+
+            if(h!=searchHandle){
+                driver.switchTo().window(h);
+                System.out.println("AAAAAAA"+driver.getTitle());
+                if (driver.getTitle().contains("百度新闻")) {
+                    System.out.println("符合条件的"+driver.getTitle());
+                    System.out.println("switch to news page successfully");
+                    break;
+                }else{
+                    continue;
+                }
+            }
+
+        }
+
+        //返回百度首页
+
+        Thread.sleep(2000);
+        driver.switchTo().window(searchHandle);
+        if (driver.getTitle().contains("百度一下")) {
+            driver.findElement(By.cssSelector("#kw")).sendKeys("switch successfully");
+        }
+*/
+
+   /* driver.close();
+    driver.quit();*/
+
+   /*//处理一个警告框
+        driver.get("http://www.baidu.com/");
+        //定位到设置
+        WebElement setls=driver.findElement(By.linkText("设置"));
+        setls.click();
+
+        //定位搜索设置并点击
+        WebElement el_set=driver.findElement(By.cssSelector(".setpref"));
+        el_set.click();
+
+        Thread.sleep(2000);
+
+        //定位保存设置按钮
+        WebElement el_save=driver.findElement(By.cssSelector(".prefpanelgo"));
+        el_save.click();
+
+        Thread.sleep(2000);
+
+
+*//*  //进入警告框并点击接受
+        driver.switchTo().alert().accept();*//*
+        //进入警告框并点击警告框
+        System.out.println(driver.switchTo().alert().getText());
+        driver.switchTo().alert().dismiss();*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*driver.close();
+        driver.quit();//退出浏览器*/
 
 
 
